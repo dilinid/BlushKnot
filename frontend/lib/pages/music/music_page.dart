@@ -1,6 +1,38 @@
 import 'package:flutter/material.dart';
 import 'music_details_page.dart';
 
+final List<Map<String, String>> musicProviders = [
+  {
+    'name': 'Nimali',
+    'location': 'Galle',
+    'contact': '071 44 55 667',
+    'imagePath': 'assets/images/photography3.jpg',
+  },
+  {
+    'name': 'Maha',
+    'location': 'Colombo 3',
+    'contact': '072 12 45 859',
+    'imagePath': 'assets/images/photography.jpg',
+  },
+  {
+    'name': 'Kamal',
+    'location': 'Kandy',
+    'contact': '077 33 22 111',
+    'imagePath': 'assets/images/photography2.jpg',
+  },
+  {
+    'name': 'Saman',
+    'location': 'Matara',
+    'contact': '075 55 66 777',
+    'imagePath': 'assets/images/photography4.jpg',
+  },
+  {
+    'name': 'Ruwan',
+    'location': 'Jaffna',
+    'contact': '078 88 99 000',
+    'imagePath': 'assets/images/photography5.jpg',
+  },
+];
 class MusicPage extends StatelessWidget {
   const MusicPage({super.key});
 
@@ -57,74 +89,102 @@ class MusicPage extends StatelessWidget {
               ),
               // Photography Providers List
               Expanded(
-                child: ListView.builder(
-                  itemCount: 6, // Example count
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const MusicDetailsPage(
-                              name: 'Maha',
-                              location: 'Colombo',
-                              contact: '072 12 45 859',
-                              imagePath: 'assets/images/photographer.jpg',
+                  child: ListView.builder(
+                    itemCount: musicProviders.length,
+                    itemBuilder: (context, index) {
+                      final provider = musicProviders[index];
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MusicDetailsPage(
+                                name: provider['name']!,
+                                location: provider['location']!,
+                                contact: provider['contact']!,
+                                imagePath: provider['imagePath']!,
+                              ),
                             ),
+                          );
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+                          padding: const EdgeInsets.all(8), 
+                          decoration: BoxDecoration(
+                            color: const Color.fromARGB(255, 252, 240, 240),
+                            borderRadius: BorderRadius.circular(8), 
                           ),
-                        );
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade300,
-                          borderRadius: BorderRadius.circular(12),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                flex: 2, 
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      provider['name']!,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16, 
+                                      ),
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      provider['location']!,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 14, 
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                flex: 1, 
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end, 
+                                  children: [
+                                    const Icon(Icons.phone, size: 16), 
+                                    const SizedBox(width: 4),
+                                    Text(
+                                      provider['contact']!,
+                                      style: const TextStyle(fontSize: 14), 
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Maha -',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                ),
-                              ),
-                              SizedBox(height: 4),
-                              Text(
-                                'Colombo 3',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Icon(Icons.phone, size: 20),
-                              SizedBox(width: 4),
-                              Text(
-                                '072 12 45 859',
-                                style: TextStyle(fontSize: 14),
-                              ),
-                            ],
-                          ),
-                        ],
+                      );
+                    },
+                  ),
+                ),
+                // Map
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Container(
+                  height: 200,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(10),
+                    image: const DecorationImage(
+                     image: AssetImage(
+                        'assets/images/map.png',
                       ),
-                      )
-                    );
-                  },
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
               ),
-            ],
-          ),
-        ],
-      ),
-    );
+              const SizedBox(height: 20),
+              ],
+              ),
+              ]
+              )
+            );
+
   }
 }
+

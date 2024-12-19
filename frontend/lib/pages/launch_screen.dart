@@ -11,7 +11,7 @@ class LaunchScreen extends StatelessWidget {
         children: [
           Positioned.fill(
             child: Image.asset(
-              'assets/images/splash.png',
+              'assets/images/launch.jpg',
               fit: BoxFit.cover,
             ),
           ),
